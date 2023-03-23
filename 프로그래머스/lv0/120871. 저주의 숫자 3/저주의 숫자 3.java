@@ -9,18 +9,6 @@ class Solution {
                     break;
                 }
             }
-            // if(answer==29){
-            //     answer += 11;
-            // }
-            // else if((answer+1)%3==0 || String.valueOf(answer+1).contains("3")){
-            //     answer += 2;
-            //     if(answer%3==0 || String.valueOf(answer).contains("3")){
-            //         answer +=1;
-            //     }
-            // }
-            // else{
-            //     answer += 1;
-            // }
         }
         return answer;
     }
