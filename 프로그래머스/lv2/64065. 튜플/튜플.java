@@ -11,7 +11,6 @@ class Solution {
         });
         
         int[] answer = new int[arr.length];
-        
         int count = -1;
         
         for(String a : arr){
@@ -28,7 +27,6 @@ class Solution {
                     answer[count] = Integer.parseInt(b);
                 }
             }
-
         }
 
         return answer;
