@@ -8,7 +8,6 @@ class Solution {
         for(int a : tangerine){
             map.put(a, map.getOrDefault(a, 0)+1);
         }
-        
         List<Integer> list = new ArrayList<>(map.values());
         Collections.sort(list, Collections.reverseOrder());
         
