@@ -1,9 +1,13 @@
 class Solution {
     public int[] solution(long n) {
-        String[] num = String.valueOf(n).split(""); 
-        int[] answer = new int[num.length];
-        for(int i=0; i<num.length; i++){
-            answer[i] = Integer.valueOf(num[num.length-i-1]);
+        StringBuilder sb = new StringBuilder(Long.toString(n));
+        int[] answer = new int[sb.length()];
+        sb.reverse();
+        int idx = 0;
+        
+        for(String a : sb.toString().split("")){
+            answer[idx] = Integer.parseInt(a);
+            idx++;
         }
         return answer;
     }
