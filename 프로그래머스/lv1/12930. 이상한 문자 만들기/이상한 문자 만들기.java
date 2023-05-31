@@ -1,25 +1,23 @@
 class Solution {
+    
+    private char calcu(char c, int i){
+        if(!Character.isAlphabetic(c)) return c;
+        
+        return i%2==0 ? Character.toUpperCase(c) : Character.toLowerCase(c);
+    }
+    
     public String solution(String s) {
-        String answer = "";
-        String[] str = s.split("");
+        StringBuilder sb = new StringBuilder();
+        char[] chars = s.toCharArray();
         int count = 0;
-        for(int i=0; i<str.length; i++){
-            if(str[i].equals(" ")){
-                count=0;
-                continue;
+        for(int i=0; i<chars.length; i++){
+            if(chars[i] == ' '){
+                count = -1;
             }
-            if(count%2==0){ // 홀수번째 대문자로
-                str[i] = str[i].toUpperCase();
-                count++;
-            }
-            else{ // 짝수번째 소문자로
-                str[i] = str[i].toLowerCase();
-                count++;
-            }
+            sb.append(calcu(chars[i], count));
+            count++;
         }
-        for(String a : str){
-            answer+=a;
-        }
-        return answer;
+        
+        return sb.toString();
     }
 }
