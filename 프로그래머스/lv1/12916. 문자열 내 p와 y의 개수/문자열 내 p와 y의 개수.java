@@ -1,23 +1,14 @@
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
-        s = s.toUpperCase();
-        String[] ars = s.split("");
-        int countP = 0;
-        int countY = 0;
-        for(String a : ars){
-            if(a.equals("P")){
-                countP++;
-            }
-            else if(a.equals("Y")){
-                countY++;
-            }
+        int p = 0;
+        int y = 0;
+        for(char c : s.toUpperCase().toCharArray()){
+            if(c == 'P') p++;
+            else if(c == 'Y') y++;
         }
-        
-        if(countP!=countY){
-            answer=false;
+        if(p!=y){
+            return false;
         }
-
-        return answer;
+        return true;
     }
 }
