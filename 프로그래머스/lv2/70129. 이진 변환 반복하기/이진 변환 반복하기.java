@@ -1,25 +1,21 @@
 class Solution {
     public int[] solution(String s) {
-        int count = 0; // 0을 제거한 개수
-        int changeNum = 0; // 바뀐 횟수
+        int[] answer = new int[2];
+        int count = 0;
+        int sum = 0;
         
-        while(true){
-            if(s.equals("1")){
-                break;
+        StringBuilder sb = new StringBuilder(s);
+        while(!sb.toString().equals("1")){
+            count++;
+            for(char c : sb.toString().toCharArray()){
+                if(c=='0') sum++;
             }
-            
-            int countZero = 0;
-            
-            for(int i=0; i<s.length(); i++){
-                if(s.charAt(i)=='0'){
-                    countZero++;
-                }
-            }
-            count += countZero;
-            s = Integer.toBinaryString(s.length() - countZero);
-            changeNum++;
+            int len = sb.toString().replaceAll("0", "").length();
+            sb.setLength(0);
+            sb.append(Integer.toString(len, 2));
         }
-        int[] answer = {changeNum, count};
+        answer[0] = count;
+        answer[1] = sum;
         return answer;
     }
 }
