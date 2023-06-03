@@ -3,13 +3,16 @@ class Solution {
     public int[] solution(int[] array, int[][] commands) {
         int[] answer = new int[commands.length];
         for(int i=0; i<commands.length; i++){
-            answer[i] = sp(commands[i][0], commands[i][1], commands[i][2], array);
+            int len = commands[i][1]-commands[i][0]+1;
+            int[] ary = new int[len];
+            
+            for(int j=0; j<len; j++){
+                ary[j] = array[commands[i][0]+j-1];
+            }
+            
+            Arrays.sort(ary);
+            answer[i] = ary[commands[i][2]-1];
         }
         return answer;
-    }
-    static int sp(int i, int j, int k, int[] arr){
-        int[] arr1 = Arrays.copyOfRange(arr, i-1, j);
-        Arrays.sort(arr1);
-        return arr1[k-1];
     }
 }
