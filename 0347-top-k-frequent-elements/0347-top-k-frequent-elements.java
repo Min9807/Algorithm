@@ -18,7 +18,7 @@ class Solution {
         }
 
         int[] answer = new int[k];
-        for(int i=k-1; i>=0; i--){
+        for(int i=0; i<k; i++){
             answer[i] = q.poll();
         }
         
