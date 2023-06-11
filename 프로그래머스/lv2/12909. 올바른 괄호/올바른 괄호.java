@@ -6,14 +6,19 @@ class Solution {
         Stack<Character> st = new Stack<>();
         
         for(char c : s.toCharArray()){
-            if(c == '(') st.push('(');
-            else if(st.isEmpty() && c == ')') return false;
-            else if(st.peek() == '(' && c == ')') st.pop();
+            if(c == '('){
+                st.push('(');
+            }else if(c == ')' && st.size() == 0){
+                return false;
+            }else{
+                st.pop();
+            }
         }
+        
         if(!st.isEmpty()){
             return false;
         }
-
+        
         return answer;
     }
 }
