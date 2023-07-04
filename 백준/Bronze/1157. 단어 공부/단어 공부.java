@@ -10,26 +10,18 @@ public class Main {
             map.put(str, map.getOrDefault(str, 0) + 1);
         }
 
-        int count = 0;
         int max = 0;
         String result = "";
         for(String key : map.keySet()){
             if(max < map.get(key)){
                 max = map.get(key);
-            }
-        }
-
-        for(String key : map.keySet()){
-            if(max == map.get(key)){
-                count++;
                 result = key;
             }
+            else if(max == map.get(key)){
+                result = "?";
+            }
         }
 
-        if(count > 1){
-            System.out.println("?");
-        }else{
-            System.out.println(result);
-        }
+        System.out.println(result);
     }
 }
