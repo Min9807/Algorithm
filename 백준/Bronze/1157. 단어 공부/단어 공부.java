@@ -1,27 +1,35 @@
+import java.io.*;
 import java.util.*;
+
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String word = sc.next();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        Map<String, Integer> map = new HashMap<>();
+        String word = br.readLine().toUpperCase();
 
-        for(String str : word.toUpperCase().split("")){
-            map.put(str, map.getOrDefault(str, 0) + 1);
+        int[] count = new int[26];
+
+        for(int i=0; i<word.length(); i++){
+            count[word.charAt(i) - 'A']++;
         }
 
         int max = 0;
-        String result = "";
-        for(String key : map.keySet()){
-            if(max < map.get(key)){
-                max = map.get(key);
-                result = key;
-            }
-            else if(max == map.get(key)){
-                result = "?";
+        char ans = '?';
+        for(int i=0; i< count.length; i++){
+            if(max < count[i]){
+                max = count[i];
+                ans = (char)(i + 'A');
             }
         }
 
-        System.out.println(result);
+        Arrays.sort(count);
+
+        if(count[count.length-1] == count[count.length-2]){
+            System.out.println("?");
+        }else{
+            System.out.println(ans);
+        }
+
     }
 }
