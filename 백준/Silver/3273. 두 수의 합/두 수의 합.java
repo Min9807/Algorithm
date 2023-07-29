@@ -1,25 +1,36 @@
-import java.util.Scanner;
+
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int[] a = new int[N];
 
-        for(int i=0; i<N; i++) a[i] = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int X = sc.nextInt();
-
-        boolean[] exists = new boolean[10000001];
-        for(int i=0; i<N; i++) exists[a[i]] =true;
-
-        int ans = 0;
+        int N = Integer.parseInt(br.readLine());
+        int[] ary = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<N; i++){
-            int pairValue = X - a[i];
-            if(0 <= pairValue && pairValue <=10000000)
-                ans += exists[pairValue] ? 1 : 0;
+            ary[i] = Integer.parseInt(st.nextToken());
         }
-        
-        System.out.println(ans / 2);
+
+        int goal = Integer.parseInt(br.readLine());
+        int ans = 0;
+        Arrays.sort(ary);
+        int start = 0;
+        int end = N-1;
+        while(start < end){
+            int sum = ary[start] + ary[end];
+            if(sum == goal){
+                ans++;
+                start++;
+            }else if(sum < goal){
+                start++;
+            }else{
+                end--;
+            }
+        }
+        System.out.println(ans);
     }
 }
