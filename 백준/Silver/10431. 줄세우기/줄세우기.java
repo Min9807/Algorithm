@@ -1,24 +1,42 @@
+import java.io.*;
 import java.util.*;
+
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        for(int i=1; i<=num; i++){
-            int number = sc.nextInt();
-            int count = 0;
 
-            int[] student = new int[20];
-            for(int j=0; j<20; j++) student[j] = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-            for(int k=0; k<20; k++){
-                for(int c=0; c<k; c++){
-                    if(student[k] < student[c]){
-                        count++;
+        int P = Integer.parseInt(br.readLine());
+
+        while(P-- > 0){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int num = Integer.parseInt(st.nextToken());
+            int ans = 0;
+
+            int[] numbers = new int[20];
+            for(int i=0; i<20; i++){
+                numbers[i] = Integer.parseInt(st.nextToken());
+            }
+
+            for(int i=0; i<19; i++){
+                if(numbers[i] > numbers[i+1]){
+                    for(int j=i+1; j>0; j--){
+                        if(numbers[j-1] > numbers[j]){
+                            ans++;
+                            int temp = numbers[j-1];
+                            numbers[j-1] = numbers[j];
+                            numbers[j] = temp;
+                            continue;
+                        }
+                        break;
                     }
                 }
             }
 
-            System.out.println(number + " " + count);
+            System.out.println(num + " " + ans);
         }
+
     }
 }
