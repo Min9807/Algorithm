@@ -1,13 +1,18 @@
+import java.io.*;
 import java.util.*;
+
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         Scanner sc = new Scanner(System.in);
-        String input1 = sc.nextLine();
-        String input2 = sc.nextLine();
+        String doc = sc.nextLine();
+        String word = sc.nextLine();
 
-        String result = input1.replace(input2, "");
-
-        System.out.println((input1.length() - result.length()) / input2.length());
-
+        String replaceWord = doc.replaceAll(word, "");
+        int ans = (doc.length() - replaceWord.length()) / word.length();
+        System.out.println(ans);
     }
 }
