@@ -20,18 +20,9 @@ public class Main {
                 numbers[i] = Integer.parseInt(st.nextToken());
             }
 
-            for(int i=0; i<19; i++){
-                if(numbers[i] > numbers[i+1]){
-                    for(int j=i+1; j>0; j--){
-                        if(numbers[j-1] > numbers[j]){
-                            ans++;
-                            int temp = numbers[j-1];
-                            numbers[j-1] = numbers[j];
-                            numbers[j] = temp;
-                            continue;
-                        }
-                        break;
-                    }
+            for(int i=0; i<20; i++){
+                for(int j=0; j<i; j++){
+                    if(numbers[i] < numbers[j]) ans++;
                 }
             }
 
