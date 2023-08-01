@@ -1,23 +1,24 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int[] person = new int[N];
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int ans = 0;
+        int[] arr = new int[N];
         for(int i=0; i<N; i++){
-            person[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(person);
-        int sum = 0;
-        int back = 0;
-        for(int num : person){
-            sum += back + num;
-            back += num;
+        Arrays.sort(arr);
+        for(int i=0; i<N; i++){
+            for(int j=0; j<=i; j++){
+                ans = ans + arr[j];
+            }
         }
-        System.out.println(sum);
+        System.out.println(ans);
     }
 
 }
