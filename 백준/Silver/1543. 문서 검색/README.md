@@ -1,10 +1,10 @@
-# [Silver IV] 문서 검색 - 1543 
+# [Silver V] 문서 검색 - 1543 
 
 [문제 링크](https://www.acmicpc.net/problem/1543) 
 
 ### 성능 요약
 
-메모리: 17776 KB, 시간: 232 ms
+메모리: 14324 KB, 시간: 128 ms
 
 ### 분류
 
