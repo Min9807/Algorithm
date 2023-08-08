@@ -1,9 +1,11 @@
 import java.util.*;
-
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
         int[] gauss = new int[50];
         Arrays.fill(gauss, 10000000);
         for(int i=0; i<50; i++){
@@ -12,14 +14,14 @@ public class Main {
             gauss[i] = num;
         }
 
-        while(count-- > 0){
-            int K = sc.nextInt();
-            boolean checkGauss = getCalcu(K, gauss);
+        while(N-- > 0){
+            int K = Integer.parseInt(br.readLine());
+            boolean checkGauss = calcu(K, gauss);
             System.out.println(checkGauss ? "1" : "0");
         }
-    }
 
-    private static boolean getCalcu(int k, int[] gauss) {
+    }
+    private static boolean calcu(int k, int[] gauss){
         for(int first : gauss){
             for(int second : gauss){
                 for(int third : gauss){
