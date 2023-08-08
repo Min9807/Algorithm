@@ -1,26 +1,26 @@
-import java.util.*;
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input1 = sc.nextLine();
-        String input2 = sc.nextLine();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        String[] a = input1.split(":");
-        String[] b = input2.split(":");
+        String[] current = br.readLine().split(":");
+        String[] target = br.readLine().split(":");
+        int currentSecond = Integer.parseInt(current[0]) * 3600 + Integer.parseInt(current[1]) * 60 + Integer.parseInt(current[2]);
+        int targetSecond = Integer.parseInt(target[0]) * 3600 + Integer.parseInt(target[1]) * 60 + Integer.parseInt(target[2]);
 
-        int aSecond = Integer.parseInt(a[0])*3600 + Integer.parseInt(a[1])*60 + Integer.parseInt(a[2]);
-        int bSecond = Integer.parseInt(b[0])*3600 + Integer.parseInt(b[1])*60 + Integer.parseInt(b[2]);
-
-        int second = bSecond - aSecond;
-        if(second <= 0){
-            second += 24 * 3600;
+        if(currentSecond >= targetSecond){
+            targetSecond += 24 * 3600;
         }
 
-        int findHour = second / 3600;
-        int findMin = (second % 3600) / 60;
-        int findSec = second % 60;
+        int result = targetSecond - currentSecond;
 
-        System.out.printf("%02d:%02d:%02d", findHour, findMin, findSec);
+        int hours = result / 3600;
+        result %= 3600;
+        int minutes = result / 60;
+        result %= 60;
+        int seconds = result;
 
+        System.out.printf("%02d:%02d:%02d\n", hours, minutes, seconds);
     }
 }
