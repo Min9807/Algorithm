@@ -1,29 +1,23 @@
-import java.util.*;
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String word1 = sc.next();
-        String word2 = sc.next();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int count = 0;
-
-        Map<String, Integer> map = new HashMap<>();
-
-        for(String str : word1.split("")){
-            map.put(str, map.getOrDefault(str, 0) + 1);
+        String word1 = br.readLine();
+        String word2 = br.readLine();
+        int[] alphabet1 = new int[26];
+        int[] alphabet2 = new int[26];
+        for(char c : word1.toCharArray()){
+            alphabet1[c-'a']++;
         }
-
-        for(String str : word2.split("")){
-            if(map.containsKey(str) && map.getOrDefault(str, 0) > 0){
-                map.put(str, map.get(str) - 1);
-                count++;
-            }
-
+        for(char c : word2.toCharArray()){
+            alphabet2[c-'a']++;
         }
-
-        int result = word1.length() + word2.length() - count*2;
-        
-        System.out.println(result);
-
+        int ans = 0;
+        for(int i=0; i<26; i++){
+            ans += Math.abs(alphabet1[i] - alphabet2[i]);
+        }
+        System.out.println(ans);
     }
 }
