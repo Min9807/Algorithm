@@ -1,43 +1,44 @@
 import java.util.*;
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int y = sc.nextInt();
-        int x = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        char[][] map = new char[y][x];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int y = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());
 
-        int w = 0;
-        int h = 0;
-
-        for(int i=0; i<y; i++) map[i] = sc.next().toCharArray();
-
+        int[][] arr = new int[y][x];
         for(int i=0; i<y; i++){
-            boolean check = true;
+            char[] chars = br.readLine().toCharArray();
             for(int j=0; j<x; j++){
-                if(map[i][j] == 'X'){
-                    check = false;
-                    break;
+                if(chars[j] == 'X'){
+                    arr[i][j] = 1;
+                }else{
+                    arr[i][j] = 0;
                 }
-            }
-            if(check){
-                w++;
             }
         }
 
+        int a = y;
+        int b = x;
+        for(int i=0; i<y; i++){
+            for(int j=0; j<x; j++){
+                if(arr[i][j] == 1){
+                    a--;
+                    break;
+                }
+            }
+        }
         for(int i=0; i<x; i++){
-            boolean check = true;
             for(int j=0; j<y; j++){
-                if(map[j][i] == 'X'){
-                    check = false;
+                if(arr[j][i] == 1){
+                    b--;
                     break;
                 }
             }
-            if(check){
-                h++;
-            }
         }
-
-        System.out.println(Math.max(w,h));
+        System.out.println(Math.max(a,b));
     }
 }
