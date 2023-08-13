@@ -1,21 +1,20 @@
-import java.io.*;
 import java.util.*;
-
+import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
-
         Set<String> set = new TreeSet<>();
-
         while(N-- > 0){
-            String[] ary = br.readLine().split(" ");
-            if(ary[1].equals("enter")){
-                set.add(ary[0]);
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String name = st.nextToken();
+            String state = st.nextToken();
+            if(state.equals("enter")){
+                set.add(name);
             }else{
-                set.remove(ary[0]);
+                set.remove(name);
             }
         }
 
