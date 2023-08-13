@@ -1,20 +1,19 @@
 import java.util.*;
-
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = sc.nextInt();
+        int N = Integer.parseInt(br.readLine());
 
         List<String> list = new ArrayList<>();
-
-        while(N-- > 0){
-            String word = sc.next();
-            if(!list.contains(word)){
-                list.add(word);
+        for(int i=0; i<N; i++){
+            String str = br.readLine();
+            if(!list.contains(str)){
+                list.add(str);
             }
         }
-
         String[] ary = new String[list.size()];
         for(int i=0; i<list.size(); i++){
             ary[i] = list.get(i);
@@ -30,5 +29,6 @@ public class Main {
         for(String str : ary){
             System.out.println(str);
         }
+
     }
 }
