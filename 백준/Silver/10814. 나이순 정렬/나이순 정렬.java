@@ -1,40 +1,40 @@
 import java.util.*;
-
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = sc.nextInt();
-        Member[] members = new Member[N];
-        int idx = 0;
-
-        while(N-- > 0){
-            int age = sc.nextInt();
-            String name = sc.next();
-            members[idx++] = new Member(name, age, idx);
+        int N = Integer.parseInt(br.readLine());
+        Student[] students = new Student[N];
+        for(int i=0; i<N; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+            students[i] = new Student(age, name, i);
         }
-
-        Arrays.sort(members, (t1, t2) -> {
-            if(t1.age == t2.age){
-                return t1.id - t2.id;
-            }
-            return t1.age - t2.age;
-        });
-
-        for(Member member : members){
-            System.out.println(member.age + " " + member.name);
+        Arrays.sort(students);
+        for(Student student : students){
+            System.out.println(student.age + " " + student.name);
         }
     }
 
-    private static class Member{
-        public int id;
-        public String name;
+    private static class Student implements Comparable<Student>{
         public int age;
-
-        public Member(String name, int age, int id){
-            this.name = name;
+        public String name;
+        public int order;
+        public Student(int age, String name, int order){
             this.age = age;
-            this.id = id;
+            this.name = name;
+            this.order = order;
+        }
+
+        @Override
+        public int compareTo(Student o){
+            if(age == o.age){
+                return order - o.order;
+            }
+            return age - o.age;
         }
     }
 }
