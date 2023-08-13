@@ -1,45 +1,45 @@
-import java.util.Scanner;
-
+import java.util.*;
+import java.io.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int K = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        char[] lucky = new char[N];
-        for(int i=0; i<N; i++){
-            lucky[i] = '?';
-        }
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        int laps = 0;
-
+        char[] fan = new char[N];
+        Arrays.fill(fan, '?');
+        int idx = 0;
         while(K-- > 0){
-            laps += sc.nextInt();
-            laps = laps % N;
-            char c = sc.next().charAt(0);
-            if(lucky[laps] == '?'){
-                lucky[laps] = c;
-            }else if(lucky[laps] != c){
-                System.out.println('!');
-                return ;
+            st = new StringTokenizer(br.readLine());
+            idx += Integer.parseInt(st.nextToken());
+            char c = st.nextToken().charAt(0);
+            idx = idx % N;
+            if(fan[idx] == '?'){
+                fan[idx] = c;
+            }
+            else if(fan[idx] != c){
+                System.out.println("!");
+                return;
             }
         }
         for(int i=0; i<N-1; i++){
             for(int j=i+1; j<N; j++){
-                if(lucky[i] != '?' && lucky[i] == lucky[j]){
+                if(fan[i] != '?' && fan[i] == fan[j]){
                     System.out.println('!');
                     return ;
                 }
             }
         }
+        
 
-        while(N-- > 0){
-            if(laps == -1){
-                laps = lucky.length-1;
-            }
-            System.out.print(lucky[laps]);
-            laps--;
+        for(int i=idx; i>=0; i--){
+            System.out.print(fan[i]);
         }
-
+        for(int i=N-1; i>idx; i--){
+            System.out.print(fan[i]);
+        }
     }
 }
