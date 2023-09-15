@@ -12,7 +12,6 @@ class Solution {
         for(int i=0; i<n; i++){
             answer[i] = min;
         }
-        
         for(int i=0; i<maxIdx; i++){
             answer[n-i-1] += 1;
         }
