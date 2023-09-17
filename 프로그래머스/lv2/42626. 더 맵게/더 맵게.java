@@ -7,6 +7,7 @@ class Solution {
         for(int a : scoville){
             q.offer(a);
         }
+        
         while(q.peek() < K){
             answer++;
             int a = q.poll();
