@@ -6,7 +6,7 @@ class Solution {
         Arrays.sort(arr, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
-                return Integer.compare(s1.length(), s2.length()); // 문자열 길이순으로 정렬
+                return Integer.compare(s1.length(), s2.length());
             }
         });
         
