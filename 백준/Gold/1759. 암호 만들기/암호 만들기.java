@@ -1,74 +1,42 @@
 import java.util.*;
 import java.io.*;
-import java.util.stream.Collectors;
-
 public class Main {
-    static String[] graph;
-    static boolean[] visited;
-    static Set<String> answer = new HashSet<>();
+    static int L, C;
+    static char[] input;
+    static char[] password;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        Set<String> set = new HashSet<>();
-        int L = Integer.parseInt(st.nextToken());
-        int C = Integer.parseInt(st.nextToken());
+        L = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+        input = new char[C];
+        password = new char[L];
         st = new StringTokenizer(br.readLine());
-        for(int i=0;i <C; i++) {
-            String alphabet = st.nextToken();
-            set.add(alphabet);
+        for(int i=0; i<C; i++) {
+            input[i] = st.nextToken().charAt(0);
         }
-
-        graph = set.toArray(new String[set.size()]);
-        Arrays.sort(graph);
-        visited = new boolean[set.size()];
-
-        for(int i=0; i<set.size(); i++) {
-            String[] ary = new String[L];
-            dfs(i, 0, ary);
-        }
-        List<String> list = new ArrayList<>(answer);
-        Collections.sort(list);
-        for(String str : list) {
-            System.out.println(str);
-        }
-    }
-    private static void dfs(int start, int idx, String[] ary) {
-        visited[start] = true;
-        ary[idx++] = graph[start];
-        if(idx == ary.length) {
-            if(check(ary)) {
-                Arrays.sort(ary);
-                StringBuilder sb = new StringBuilder();
-                for(String str : ary) {
-                    sb.append(str);
-                }
-                answer.add(sb.toString());
-            }
-        } else{
-            for(int i=start + 1; i<graph.length; i++) {
-                if(!visited[i]) {
-                    dfs(i, idx, ary);
-                    visited[i] = false;
-                }
-            }
-        }
-
+        Arrays.sort(input);
+        find(0, 0, 0);
     }
 
-    private static boolean check(String[] ary) {
-        int cnt1 = 0;
-        int cnt2 = 0;
-        for(String str : ary) {
-            if(str.equals("a") || str.equals("e") || str.equals("i") || str.equals("o") || str.equals("u")){
-                cnt1++;
-            }else {
-                cnt2++;
+    private static void find(int length, int idx, int cnt) {
+        if(length == L) {
+            if(cnt >= 1 && L - cnt >= 2) {
+                System.out.println(password);
             }
+            return;
         }
-        if(cnt1 > 0 && cnt2 > 1){
-            return true;
+        if(idx < C) {
+            password[length] = input[idx];
+            int value = check(input[idx]) ? 1 : 0;
+            find(length + 1, idx + 1, cnt + value);
+            password[length] = 0;
+            find(length, idx + 1, cnt);
         }
-        return false;
+    }
+
+    private static boolean check(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
 }
