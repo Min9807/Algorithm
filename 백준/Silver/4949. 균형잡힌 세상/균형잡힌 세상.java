@@ -1,48 +1,39 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        while(true){
+        while (true) {
             String str = br.readLine();
-            if(str.equals(".")){
+            if (str.equals(".")) {
                 break;
             }
-            String[] arr = str.split("");
-
-            Stack<String> st = new Stack<>();
-
-            for(String value : arr){
-                if(value.equals("(") || value.equals("{") || value.equals("[")){
-                    st.push(value);
-                }else if(value.equals(")") || value.equals("}") || value.equals("]")){
-                    if(st.isEmpty()){
-                        st.push("sdfsdf");
-                        break;
-                    }
-                    if(value.equals(")")){
-                        value = "(";
-                    }else if(value.equals("}")){
-                        value = "{";
-                    }else if(value.equals("]")){
-                        value = "[";
-                    }
-                    String top = st.peek();
-                    if(top.equals(value)){
-                        st.pop();
-                    }else{
-                        break;
-                    }
-                }
-            }
-            if(!st.isEmpty()){
-                System.out.println("no");
-            }else{
+            if (checkBalance(str)) {
                 System.out.println("yes");
+            } else {
+                System.out.println("no");
             }
         }
+    }
+
+    private static boolean checkBalance(String str) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : str.toCharArray()) {
+            if (c == '(' || c == '[') {
+                stack.push(c);
+            } else if ((c == ')' || c == ']') && !stack.isEmpty()) {
+                char top = stack.peek();
+                if ((c == ')' && top == '(') || (c == ']' && top == '[')) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if (c == ')' || c == ']') {
+                return false;
+            }
+        }
+        return stack.isEmpty();
     }
 }
