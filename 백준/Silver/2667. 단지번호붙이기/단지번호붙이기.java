@@ -1,51 +1,66 @@
 import java.util.*;
-
+import java.io.*;
 public class Main {
-    static int cnt = 0;
-    static int[] a = {0, -1, 0, 1};
-    static int[] b = {1, 0, -1, 0};
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    static int[] dx = {0, 0, -1, 1};
+    static int[] dy = {1, -1, 0, 0};
+    static int[][] graph;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int N = Integer.parseInt(br.readLine());
+        graph = new int[N][N];
 
-        int N = sc.nextInt();
-        int[][] map = new int[N][N];
-        for(int i=0; i<N; i++){
-            String[] numbers = sc.next().split("");
-            for(int j=0; j<N; j++){
-                map[i][j] = Integer.parseInt(numbers[j]);
+        for(int i=0; i<N; i++) {
+            String row = br.readLine();
+            for(int j=0; j<N; j++) {
+                graph[i][j] = row.charAt(j) - '0';
             }
         }
-
         List<Integer> list = new ArrayList<>();
-
-        for(int i=0; i<N; i++){
-            for(int j=0; j<N; j++){
-                if(map[i][j] == 1){
-                    cnt = 1;
-                    dfs(map, i, j);
+        for(int i=0; i<N; i++) {
+            for(int j=0; j<N; j++) {
+                if(graph[i][j] == 1) {
+                    int cnt = bfs(j, i);
                     list.add(cnt);
                 }
             }
         }
-
-        Collections.sort(list);
         System.out.println(list.size());
-        for(int num : list){
+        Collections.sort(list);
+        for(int num : list) {
             System.out.println(num);
         }
-    }
-    private static void dfs(int[][] map, int y, int x){
 
-        map[y][x] = 0;
-        for(int i=0; i<4; i++){
-            int dx = x + a[i];
-            int dy = y + b[i];
-            if(dx >= 0 && dy >= 0 && dx < map[0].length && dy < map[0].length){
-                if(map[dy][dx] == 1){
-                    cnt++;
-                    dfs(map, dy, dx);
+    }
+
+    private static int bfs(int x, int y) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(new Node(x, y));
+        graph[y][x] = 0;
+        int cnt = 0;
+        while(!q.isEmpty()) {
+            Node node = q.poll();
+            cnt++;
+            for(int i=0; i<4; i++) {
+                int kx = dx[i] + node.x;
+                int ky = dy[i] + node.y;
+                if(kx >= 0 && kx < graph[0].length && ky >= 0 && ky < graph.length) {
+                    if(graph[ky][kx] == 1) {
+                        graph[ky][kx] = 0;
+                        q.offer(new Node(kx, ky));
+                    }
                 }
             }
+        }
+        return cnt;
+    }
+
+    private static class Node {
+        public int x;
+        public int y;
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 }
